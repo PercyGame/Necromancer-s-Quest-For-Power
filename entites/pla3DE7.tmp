@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg8h3y7u81lho"]
+[gd_scene load_steps=6 format=3 uid="uid://dg8h3y7u81lho"]
 
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_sgyb8"]
 [ext_resource type="Script" path="res://entites/player.gd" id="1_wogxi"]
-[ext_resource type="PackedScene" uid="uid://dbmhjms4c1fnp" path="res://ability/fire_ball.tscn" id="2_qdtym"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_naexu"]
 radius = 7.0
@@ -13,7 +12,6 @@ radius = 7.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_wogxi")
-FIRE_BALL = ExtResource("2_qdtym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_naexu")
