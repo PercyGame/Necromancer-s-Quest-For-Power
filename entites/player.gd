@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @export var FIRE_BALL: PackedScene
+@export var HIT_PROVIDER: PackedScene
+@export var DECAY: PackedScene
 
 var health:float = 100
 var maw_health = 100
@@ -26,8 +28,8 @@ func get_input_values(input_type:int):
 # function that manage player's movments
 func movment(delta):
 	# compute the player velocity (for the move_and_slide() function)
-	self.velocity = get_input_values(0) * delta * 5000
-	move_and_slide() # godot build-in function that move stuff around
+	self.velocity = get_input_values(0) * delta * 300
+	position += self.velocity # godot build-in function that move stuff around
 	"""
 	if Input.is_action_just_pressed("dash"):
 		dash(delta)
@@ -43,10 +45,21 @@ func cast_fire_ball():
 			fire_ball.global_rotation = input_aiming.angle()
 
 func hit():
-	pass
+	var input_aiming = get_input_values(1)
+	if input_aiming != Vector2.ZERO:
+		if HIT_PROVIDER:
+			var hit_provider: Area2D = HIT_PROVIDER.instantiate()
+			add_child(hit_provider)
+			hit_provider.global_rotation = input_aiming.angle()
 
 func cast_dacay():
-	pass
+	var input_aiming = get_input_values(1)
+	if input_aiming != Vector2.ZERO:
+		if DECAY:
+			var decay: CharacterBody2D = DECAY.instantiate()
+			owner.add_child(decay)
+			decay._create(input_aiming)
+			decay.global_position = global_position
 
 # need to be finished. Shoult trace a line, to indicate where the player is aiming at
 func direction_indicator():
@@ -57,7 +70,12 @@ func dash(delta):
 	self.velocity = get_input_values(0) * delta * 500000
 	move_and_slide()
 
+# main function that run at  every game tick
 func _process(delta):
 	movment(delta)
 	if Input.is_action_just_pressed("cast_fire_ball"):
 		cast_fire_ball()
+	if Input.is_action_just_pressed("hit"):
+		hit()
+	if Input.is_action_just_pressed("cast_dacay"):
+		cast_dacay()
