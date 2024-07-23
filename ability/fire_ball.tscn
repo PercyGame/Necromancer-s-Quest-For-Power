@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbmhjms4c1fnp"]
+[gd_scene load_steps=6 format=3 uid="uid://dbmhjms4c1fnp"]
 
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_4py4j"]
 [ext_resource type="Script" path="res://ability/fire_ball.gd" id="1_5v4tn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cqge4"]
 radius = 6.0
+
+[sub_resource type="Gradient" id="Gradient_hn7td"]
+offsets = PackedFloat32Array(0, 0.707071)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fugry"]
+gradient = SubResource("Gradient_hn7td")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_5v4tn")
@@ -21,5 +30,9 @@ shape = SubResource("CircleShape2D_cqge4")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.6, 0.6)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.627451, 0.290196, 0, 1)
+texture = SubResource("GradientTexture2D_fugry")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

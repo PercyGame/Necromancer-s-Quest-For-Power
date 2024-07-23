@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dknoqwgpidnyl"]
+[gd_scene load_steps=7 format=3 uid="uid://dknoqwgpidnyl"]
 
 [ext_resource type="PackedScene" uid="uid://dg8h3y7u81lho" path="res://entites/player.tscn" id="1_ctjwc"]
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="2_pg12y"]
+[ext_resource type="PackedScene" uid="uid://olwkfqg1m22u" path="res://entites/skeleton.tscn" id="4_p8htx"]
+
+[sub_resource type="GDScript" id="GDScript_7ylt6"]
 
 [sub_resource type="Gradient" id="Gradient_tl4dv"]
 offsets = PackedFloat32Array(0, 0.686869)
@@ -13,20 +16,24 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_7ylt6")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-128, -16)
 texture = ExtResource("2_pg12y")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ctjwc")]
-position = Vector2(-1, 4)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.7
 blend_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-67, -12)
+position = Vector2(-66, -53)
+scale = Vector2(2.64063, 2.1875)
 color = Color(0.92549, 0.498039, 0, 1)
 energy = 2.2
 texture = SubResource("GradientTexture2D_nq37o")
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("4_p8htx")]
+position = Vector2(-27, -51)
