@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dknoqwgpidnyl"]
+[gd_scene load_steps=5 format=3 uid="uid://dknoqwgpidnyl"]
 
 [ext_resource type="PackedScene" uid="uid://dg8h3y7u81lho" path="res://entites/player.tscn" id="1_ctjwc"]
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="2_pg12y"]
+
+[sub_resource type="Gradient" id="Gradient_tl4dv"]
+offsets = PackedFloat32Array(0, 0.686869)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nq37o"]
+gradient = SubResource("Gradient_tl4dv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Node2D" type="Node2D"]
 
@@ -11,3 +20,13 @@ texture = ExtResource("2_pg12y")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ctjwc")]
 position = Vector2(-1, 4)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.7
+blend_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-67, -12)
+color = Color(0.92549, 0.498039, 0, 1)
+energy = 2.2
+texture = SubResource("GradientTexture2D_nq37o")

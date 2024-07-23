@@ -5,8 +5,13 @@ class_name Player
 @export var HIT_PROVIDER: PackedScene
 @export var DECAY: PackedScene
 
+@onready var aiming_indicator = $aiming_indicator
+
 var health:float = 100
 var maw_health = 100
+var speed = 100
+
+	
 
 # function that return the asked current input value
 func get_input_values(input_type:int):
@@ -28,7 +33,7 @@ func get_input_values(input_type:int):
 # function that manage player's movments
 func movment(delta):
 	# compute the player velocity (for the move_and_slide() function)
-	self.velocity = get_input_values(0) * delta * 300
+	self.velocity = get_input_values(0) * delta * speed
 	position += self.velocity # godot build-in function that move stuff around
 	"""
 	if Input.is_action_just_pressed("dash"):
@@ -63,7 +68,12 @@ func cast_dacay():
 
 # need to be finished. Shoult trace a line, to indicate where the player is aiming at
 func direction_indicator():
-	var direction:float = get_input_values(1).angle()
+	var direction = get_input_values(1)
+	if direction != Vector2.ZERO:
+		aiming_indicator.global_rotation = direction.angle()
+		aiming_indicator.show()
+	else:
+		aiming_indicator.hide()
 
 # not finished yet (need to be finetuned
 func dash(delta):
@@ -72,6 +82,7 @@ func dash(delta):
 
 # main function that run at  every game tick
 func _process(delta):
+	direction_indicator()
 	movment(delta)
 	if Input.is_action_just_pressed("cast_fire_ball"):
 		cast_fire_ball()

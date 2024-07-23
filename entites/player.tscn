@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dg8h3y7u81lho"]
+[gd_scene load_steps=9 format=3 uid="uid://dg8h3y7u81lho"]
 
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_sgyb8"]
 [ext_resource type="Script" path="res://entites/player.gd" id="1_wogxi"]
 [ext_resource type="PackedScene" uid="uid://dbmhjms4c1fnp" path="res://ability/fire_ball.tscn" id="2_qdtym"]
 [ext_resource type="PackedScene" uid="uid://dmmxqc7025isr" path="res://ability/hit_provider.tscn" id="3_xy80w"]
 [ext_resource type="PackedScene" uid="uid://ct683kn53177d" path="res://ability/decay.tscn" id="4_f8ohh"]
+[ext_resource type="PackedScene" uid="uid://cfuet6ml2oh43" path="res://ability/aiming_indicator.tscn" id="6_ge0o8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_naexu"]
 radius = 7.0
@@ -25,6 +26,9 @@ shape = SubResource("CapsuleShape2D_naexu")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../AnimationPlayer")
 tree_root = SubResource("AnimationRootNode_ugj0f")
+
+[node name="aiming_indicator" parent="." instance=ExtResource("6_ge0o8")]
+position = Vector2(0, 14)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
