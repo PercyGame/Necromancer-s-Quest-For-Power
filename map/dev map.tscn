@@ -30,7 +30,7 @@ energy = 0.7
 blend_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(51, -11)
+position = Vector2(-90, -56)
 scale = Vector2(2.64063, 2.1875)
 color = Color(0.92549, 0.498039, 0, 1)
 energy = 2.2

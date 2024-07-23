@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Decay
 
 var DIRECTION = Vector2.ZERO
-@export var SPEED:int = 150
+@export var SPEED:int = 100
 
 func _create(direction:Vector2):
 	DIRECTION = direction.normalized()

@@ -7,8 +7,10 @@ class_name Player
 
 @onready var aiming_indicator = $aiming_indicator
 
-var health:float = 100
-var maw_health = 100
+""" to deal with player health, please use globals.player_health, it allow the
+game to syncronize player health among levels
+Same for player score """
+var max_health = 10
 var speed = 100
 
 	

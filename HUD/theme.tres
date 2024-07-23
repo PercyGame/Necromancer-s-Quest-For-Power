@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b28w6ny6cu743"]
+
+[ext_resource type="FontFile" uid="uid://cwjr8gul6a833" path="res://assets/ui/fonts/Alkhemikal.ttf" id="1_obmlv"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_t54oj"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+color = Color(0.5, 0.5, 0.5, 1)
+
+[resource]
+default_font = ExtResource("1_obmlv")
+Button/font_sizes/font_size = 25
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = SubResource("StyleBoxLine_t54oj")
