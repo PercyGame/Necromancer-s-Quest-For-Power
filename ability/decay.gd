@@ -3,6 +3,7 @@ class_name Decay
 
 var DIRECTION = Vector2.ZERO
 @export var SPEED:int = 100
+var mana_cost = 25
 
 func _create(direction:Vector2):
 	DIRECTION = direction.normalized()

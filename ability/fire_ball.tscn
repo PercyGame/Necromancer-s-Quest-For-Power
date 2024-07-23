@@ -1,38 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbmhjms4c1fnp"]
+[gd_scene load_steps=7 format=3 uid="uid://dbmhjms4c1fnp"]
 
-[ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_4py4j"]
 [ext_resource type="Script" path="res://ability/fire_ball.gd" id="1_5v4tn"]
+[ext_resource type="Texture2D" uid="uid://jhvtj2s6d2dp" path="res://assets/entites/player/abbility/fire_ball.png" id="2_522bp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cqge4"]
 radius = 6.0
 
-[sub_resource type="Gradient" id="Gradient_hn7td"]
-offsets = PackedFloat32Array(0, 0.707071)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_mvcp2"]
+offsets = PackedFloat32Array(0, 0.691919)
+colors = PackedColorArray(1, 0.698039, 0.105882, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fugry"]
-gradient = SubResource("Gradient_hn7td")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jtnyc"]
+gradient = SubResource("Gradient_mvcp2")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_ncnie"]
+colors = PackedColorArray(1, 1, 0.6, 1, 1, 0.403922, 0.113725, 1)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_5v4tn")
 
-[node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(2.98023e-08, -2.98023e-08)
-scale = Vector2(0.0859375, 0.0859375)
-texture = ExtResource("1_4py4j")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_cqge4")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.6, 0.6)
 
+[node name="FireBall" type="Sprite2D" parent="."]
+texture = ExtResource("2_522bp")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(0.627451, 0.290196, 0, 1)
-texture = SubResource("GradientTexture2D_fugry")
+texture = SubResource("GradientTexture2D_jtnyc")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 360
+lifetime = 0.3
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(0, 0)
+angular_velocity_min = 10.0
+angular_velocity_max = 20.0
+color_ramp = SubResource("Gradient_ncnie")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

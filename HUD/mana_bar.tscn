@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dupvg247kwoi0"]
+
+[ext_resource type="Script" path="res://HUD/mana_bar.gd" id="1_q3vxr"]
+[ext_resource type="Texture2D" uid="uid://dals0c3y0va43" path="res://assets/ui/bar_bg.png" id="2_x2qnp"]
+[ext_resource type="Texture2D" uid="uid://eijx0m4ahafp" path="res://assets/ui/mana_fg.png" id="3_upddn"]
+[ext_resource type="Texture2D" uid="uid://bc7gax6popou7" path="res://assets/ui/mana_progress.png" id="4_2agtm"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 128.0
+offset_bottom = 16.0
+script = ExtResource("1_q3vxr")
+
+[node name="bar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 51.0
+texture_under = ExtResource("2_x2qnp")
+texture_over = ExtResource("3_upddn")
+texture_progress = ExtResource("4_2agtm")

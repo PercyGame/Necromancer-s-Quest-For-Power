@@ -10,14 +10,18 @@ config_version=5
 
 [application]
 
-config/name="NecroQuest"
+config/name="The necromancer's Legacy"
 run/main_scene="res://HUD/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
 globals="*res://scripts/globals.gd"
+
+[display]
+
+window/size/mode=4
 
 [input]
 
@@ -92,5 +96,6 @@ dash={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

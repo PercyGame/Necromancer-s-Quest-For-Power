@@ -6,11 +6,13 @@ class_name Player
 @export var DECAY: PackedScene
 
 @onready var aiming_indicator = $aiming_indicator
+@onready var dash_timer = $dash_timer
 
 """ to deal with player health, please use globals.player_health, it allow the
 game to syncronize player health among levels
 Same for player score """
-var max_health = 10
+var base_speed = 100
+var dash_speed = 600
 var speed = 100
 
 	
@@ -37,19 +39,19 @@ func movment(delta):
 	# compute the player velocity (for the move_and_slide() function)
 	self.velocity = get_input_values(0) * delta * speed
 	position += self.velocity # godot build-in function that move stuff around
-	"""
 	if Input.is_action_just_pressed("dash"):
 		dash(delta)
-	"""
 
 func cast_fire_ball():
 	var input_aiming = get_input_values(1)
 	if input_aiming != Vector2.ZERO:
 		if FIRE_BALL:
-			var fire_ball: Area2D = FIRE_BALL.instantiate()
-			owner.add_child(fire_ball)
-			fire_ball.global_position = global_position
-			fire_ball.global_rotation = input_aiming.angle()
+			if globals.player_mana >= FIRE_BALL.instantiate().mana_cost:
+				var fire_ball: Area2D = FIRE_BALL.instantiate()
+				owner.add_child(fire_ball)
+				globals.player_mana -= fire_ball.mana_cost
+				fire_ball.global_position = global_position
+				fire_ball.global_rotation = input_aiming.angle()
 
 func hit():
 	var input_aiming = get_input_values(1)
@@ -63,10 +65,12 @@ func cast_dacay():
 	var input_aiming = get_input_values(1)
 	if input_aiming != Vector2.ZERO:
 		if DECAY:
-			var decay: CharacterBody2D = DECAY.instantiate()
-			owner.add_child(decay)
-			decay._create(input_aiming)
-			decay.global_position = global_position
+			if globals.player_mana >= DECAY.instantiate().mana_cost:
+				var decay: CharacterBody2D = DECAY.instantiate()
+				owner.add_child(decay)
+				globals.player_mana -= decay.mana_cost
+				decay._create(input_aiming)
+				decay.global_position = global_position
 
 # need to be finished. Shoult trace a line, to indicate where the player is aiming at
 func direction_indicator():
@@ -77,10 +81,10 @@ func direction_indicator():
 	else:
 		aiming_indicator.hide()
 
-# not finished yet (need to be finetuned
 func dash(delta):
-	self.velocity = get_input_values(0) * delta * 500000
-	move_and_slide()
+	globals.is_player_hittable = false
+	speed = dash_speed
+	dash_timer.start()
 
 # main function that run at  every game tick
 func _process(delta):
@@ -92,3 +96,13 @@ func _process(delta):
 		hit()
 	if Input.is_action_just_pressed("cast_dacay"):
 		cast_dacay()
+
+
+func _on_mana_regen_timeout():
+	if globals.player_mana < globals.player_max_mana:
+		globals.player_mana += 2
+
+
+func _on_dash_timer_timeout():
+	globals.is_player_hittable = true
+	speed = base_speed

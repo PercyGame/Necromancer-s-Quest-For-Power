@@ -8,6 +8,7 @@ A fire ball make 2 attack damage
 const RIGHT = Vector2.RIGHT
 @export var SPEED:int = 100
 
+var mana_cost = 10
 var damage = 2
 
 func _physics_process(delta):

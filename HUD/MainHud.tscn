@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqr2xa8rm7qij"]
+
+[ext_resource type="PackedScene" uid="uid://ci73fo6rl6o48" path="res://HUD/health_bar.tscn" id="1_pvy47"]
+[ext_resource type="PackedScene" uid="uid://dupvg247kwoi0" path="res://HUD/mana_bar.tscn" id="2_3tvl2"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
+follow_viewport_scale = 3.0
+
+[node name="HealthBar" parent="." instance=ExtResource("1_pvy47")]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 138.0
+offset_bottom = 26.0
+
+[node name="ManaBar" parent="." instance=ExtResource("2_3tvl2")]
+offset_left = 10.3333
+offset_top = 21.6667
+offset_right = 138.333
+offset_bottom = 37.6667
+size_flags_horizontal = 4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dg8h3y7u81lho"]
+[gd_scene load_steps=10 format=3 uid="uid://dg8h3y7u81lho"]
 
 [ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_sgyb8"]
 [ext_resource type="Script" path="res://entites/player.gd" id="1_wogxi"]
@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dmmxqc7025isr" path="res://ability/hit_provider.tscn" id="3_xy80w"]
 [ext_resource type="PackedScene" uid="uid://ct683kn53177d" path="res://ability/decay.tscn" id="4_f8ohh"]
 [ext_resource type="PackedScene" uid="uid://cfuet6ml2oh43" path="res://ability/aiming_indicator.tscn" id="6_ge0o8"]
+[ext_resource type="PackedScene" uid="uid://cqr2xa8rm7qij" path="res://HUD/MainHud.tscn" id="7_lcelq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_naexu"]
 radius = 7.0
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_ugj0f"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wogxi")
 FIRE_BALL = ExtResource("2_qdtym")
 HIT_PROVIDER = ExtResource("3_xy80w")
@@ -38,4 +39,18 @@ texture = ExtResource("1_sgyb8")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
 scale = Vector2(0.109375, 0.234375)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="MainHUD" parent="." instance=ExtResource("7_lcelq")]
+
+[node name="mana_regen" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="mana_regen" to="." method="_on_mana_regen_timeout"]
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

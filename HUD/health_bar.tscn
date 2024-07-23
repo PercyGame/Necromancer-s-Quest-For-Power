@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci73fo6rl6o48"]
+
+[ext_resource type="Script" path="res://HUD/health_bar.gd" id="1_ri4xr"]
+[ext_resource type="Texture2D" uid="uid://dals0c3y0va43" path="res://assets/ui/bar_bg.png" id="2_134ck"]
+[ext_resource type="Texture2D" uid="uid://d28olq2h1htmp" path="res://assets/ui/health_fg.png" id="3_p2u4g"]
+[ext_resource type="Texture2D" uid="uid://bg7lbyllqbr5q" path="res://assets/ui/health_progress.png" id="4_rdqor"]
+
+[node name="HealthBar" type="HBoxContainer"]
+offset_right = 128.0
+offset_bottom = 16.0
+script = ExtResource("1_ri4xr")
+
+[node name="bar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("2_134ck")
+texture_over = ExtResource("3_p2u4g")
+texture_progress = ExtResource("4_rdqor")
