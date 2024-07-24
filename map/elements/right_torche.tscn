@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ba21u5yrxunw7"]
 
-[ext_resource type="Texture2D" uid="uid://bfeq8h0rv2igt" path="res://assets/decor/torche.png" id="1_d02j0"]
+[ext_resource type="Texture2D" uid="uid://bfeq8h0rv2igt" path="res://assets/environment/torche.png" id="1_d02j0"]
 [ext_resource type="Script" path="res://map/elements/torche.gd" id="2_1a55u"]
 [ext_resource type="PackedScene" uid="uid://btex3rhflnuy8" path="res://map/elements/torche_particle.tscn" id="3_vneuq"]
 
