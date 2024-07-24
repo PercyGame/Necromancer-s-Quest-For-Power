@@ -8,6 +8,7 @@ class_name Player
 @onready var aiming_indicator = $aiming_indicator
 @onready var dash_timer = $dash_timer
 @onready var pause_menu = $PauseHUD
+@onready var animation_tree = $AnimationTree
 
 """ to deal with player health, please use globals.player_health, it allow the
 game to syncronize player health among levels
@@ -21,6 +22,19 @@ var paused = false
 
 # main function that run at  every game tick
 func _process(delta):
+	if get_input_values(0) == Vector2.ZERO:
+		animation_tree.get("parameters/playback").travel("Idle")
+	else:
+		animation_tree.get("parameters/playback").travel("Walk")
+		animation_tree.set("parameters/Idle/BlendSpace1D/blend_position", get_input_values(0).x)
+		animation_tree.set("parameters/Walk/BlendSpace1D/blend_position", get_input_values(0).x)
+		animation_tree.set("parameters/Damage/BlendSpace1D/blend_position", get_input_values(0).x)
+	
+	if get_input_values(1) == Vector2.ZERO:
+		pass
+	else:
+		animation_tree.set("parameters/Cast/BlendSpace1D/blend_position", get_input_values(1).x)
+	
 	if globals.player_health <= 0:
 		globals.player_health = globals.player_max_health
 		globals.player_mana = globals.player_max_mana
@@ -65,6 +79,7 @@ func movment():
 	#position += self.velocity # godot build-in function that move stuff around
 	if Input.is_action_just_pressed("dash"):
 		dash()
+	
 
 func cast_fire_ball():
 	var input_aiming = get_input_values(1)
@@ -76,6 +91,7 @@ func cast_fire_ball():
 				globals.player_mana -= fire_ball.mana_cost
 				fire_ball.global_position = global_position
 				fire_ball.global_rotation = input_aiming.angle()
+				animation_tree.get("parameters/playback").travel("Cast")
 
 func hit():
 	var input_aiming = get_input_values(1)
