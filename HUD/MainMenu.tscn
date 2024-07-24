@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvftrsf5fj5xk"]
+[gd_scene load_steps=6 format=3 uid="uid://dvftrsf5fj5xk"]
 
 [ext_resource type="Script" path="res://HUD/MainMenu.gd" id="1_dqemj"]
 [ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="1_jaaa0"]
+[ext_resource type="AudioStream" uid="uid://d13a7llqh6151" path="res://assets/sounds/music/Light Ambient 5 (Loop).wav" id="3_uehrf"]
 
 [sub_resource type="Gradient" id="Gradient_5lu4u"]
 colors = PackedColorArray(0.146554, 0.285029, 0.226271, 1, 0.0306744, 0.0593292, 0.141018, 1)
@@ -82,3 +83,8 @@ text = "Parameters"
 layout_mode = 2
 action_mode = 0
 text = "Quit game"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uehrf")
+autoplay = true
+bus = &"Music"

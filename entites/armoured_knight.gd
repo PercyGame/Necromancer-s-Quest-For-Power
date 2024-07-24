@@ -73,9 +73,10 @@ func _on_detection_area_body_exited(body):
 		is_player_detected = false
 
 func follow_player(delta):
-	var direction = global_position.direction_to(player.global_position)
-	self.velocity = direction * speed * delta
-	position += self.velocity
+	if not is_player_attackable:
+		var direction = global_position.direction_to(player.global_position)
+		self.velocity = direction * speed * delta
+		position += self.velocity
 
 func attack_player():
 	if globals.is_player_hittable:

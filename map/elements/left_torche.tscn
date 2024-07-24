@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdsrw5yq8mxk3"]
+
+[ext_resource type="Texture2D" uid="uid://dm6mg47o5wr4y" path="res://assets/decor/ground.png" id="1_on85d"]
+[ext_resource type="Script" path="res://map/elements/torche.gd" id="2_hd554"]
+
+[sub_resource type="Animation" id="Animation_p032q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_dn3d1"]
+resource_name = "idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [19, 20]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v40go"]
+_data = {
+"RESET": SubResource("Animation_p032q"),
+"idle": SubResource("Animation_dn3d1")
+}
+
+[sub_resource type="Gradient" id="Gradient_a1bsh"]
+offsets = PackedFloat32Array(0, 0.116162, 0.712121)
+colors = PackedColorArray(1, 1, 0.247059, 1, 1, 0.588235, 0.109804, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_baryy"]
+gradient = SubResource("Gradient_a1bsh")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="left_torche" type="Sprite2D"]
+texture = ExtResource("1_on85d")
+hframes = 8
+vframes = 3
+frame = 19
+script = ExtResource("2_hd554")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v40go")
+}
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -5)
+energy = 0.7
+texture = SubResource("GradientTexture2D_baryy")
+texture_scale = 3.0
