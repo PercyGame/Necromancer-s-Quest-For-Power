@@ -35,12 +35,13 @@ func get_input_values(input_type:int):
 		return input_aiming # return the generated vector
 
 # function that manage player's movments
-func movment(delta):
+func movment():
 	# compute the player velocity (for the move_and_slide() function)
-	self.velocity = get_input_values(0) * delta * speed
-	position += self.velocity # godot build-in function that move stuff around
+	self.velocity = get_input_values(0) * speed
+	move_and_slide()
+	#position += self.velocity # godot build-in function that move stuff around
 	if Input.is_action_just_pressed("dash"):
-		dash(delta)
+		dash()
 
 func cast_fire_ball():
 	var input_aiming = get_input_values(1)
@@ -81,15 +82,19 @@ func direction_indicator():
 	else:
 		aiming_indicator.hide()
 
-func dash(delta):
+func dash():
 	globals.is_player_hittable = false
 	speed = dash_speed
 	dash_timer.start()
 
 # main function that run at  every game tick
 func _process(delta):
+	if globals.player_health <= 0:
+		globals.player_health = globals.player_max_health
+		globals.player_mana = globals.player_max_mana
+		get_tree().change_scene_to_file("res://HUD/MainMenu.tscn")
 	direction_indicator()
-	movment(delta)
+	movment()
 	if Input.is_action_just_pressed("cast_fire_ball"):
 		cast_fire_ball()
 	if Input.is_action_just_pressed("hit"):

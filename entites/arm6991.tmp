@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx64s018y88to"]
+
+[ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_drp1y"]
+[ext_resource type="Script" path="res://entites/armoured_knight.gd" id="1_hurb3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l1eov"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_058wd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui2ut"]
+radius = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abj2j"]
+radius = 159.113
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_djhhe"]
+radius = 38.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_hurb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_l1eov")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.203922, 0, 0.921569, 1)
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(0.15625, 0.234375)
+texture = ExtResource("1_drp1y")
+
+[node name="hit_Area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_Area"]
+shape = SubResource("CapsuleShape2D_058wd")
+
+[node name="decayed_timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="stune_Area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stune_Area"]
+shape = SubResource("CircleShape2D_ui2ut")
+
+[node name="detection_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_abj2j")
+
+[node name="attaque_Area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attaque_Area"]
+shape = SubResource("CircleShape2D_djhhe")
+
+[connection signal="area_entered" from="hit_Area" to="." method="_on_hit_area_area_entered"]
+[connection signal="body_entered" from="hit_Area" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="attaque_Area" to="." method="_on_attaque_area_body_entered"]
+[connection signal="body_exited" from="attaque_Area" to="." method="_on_attaque_area_body_exited"]

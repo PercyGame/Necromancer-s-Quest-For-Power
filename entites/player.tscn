@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cfuet6ml2oh43" path="res://ability/aiming_indicator.tscn" id="6_ge0o8"]
 [ext_resource type="PackedScene" uid="uid://cqr2xa8rm7qij" path="res://HUD/MainHud.tscn" id="7_lcelq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_naexu"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6fxw"]
+size = Vector2(12, 7)
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_ugj0f"]
 
@@ -20,7 +20,9 @@ HIT_PROVIDER = ExtResource("3_xy80w")
 DECAY = ExtResource("4_f8ohh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_naexu")
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_j6fxw")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

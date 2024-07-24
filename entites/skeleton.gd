@@ -19,7 +19,7 @@ var health = 10
 var is_player_detected = false
 var is_player_attackable = false
 var is_player_in_attack_range = false
-var speed = 40
+var speed = 75
 var damage = 2
 
 
@@ -31,7 +31,7 @@ func _process(delta):
 	if is_player_attackable and not stuned:
 		attack_player()
 	if is_player_detected and not stuned:
-		follow_player(delta)
+		follow_player()
 	if health <= 0:
 		destory()
 
@@ -52,6 +52,11 @@ func _on_hit_area_area_entered(area):
 		var fire_ball:Fire_ball = area as Fire_ball
 		if decayed:
 			health -= fire_ball.damage
+	
+	if area is Hit_provider:
+		var hit_provider:Hit_provider = area as Hit_provider
+		if decayed:
+			health -= hit_provider.damage
 
 
 func _on_detection_area_body_entered(body):
@@ -63,15 +68,15 @@ func _on_detection_area_body_exited(body):
 	if body is Player:
 		is_player_detected = false
 
-func follow_player(delta):
-	var direction = global_position.direction_to(player.global_position)
-	self.velocity = direction * speed * delta
-	position += self.velocity
+func follow_player():
+	if not is_player_attackable:
+		var direction = global_position.direction_to(player.global_position)
+		self.velocity = direction * speed
+		move_and_slide()
 
 func attack_player():
 	if globals.is_player_hittable:
 		attack_timer.start()
-		globals.player_health -= damage
 		is_player_attackable = false
 
 func _on_attaque_area_body_entered(body):
@@ -86,4 +91,5 @@ func _on_attaque_area_body_exited(body):
 
 func _on_attack_timer_timeout():
 	if is_player_in_attack_range:
+		globals.player_health -= damage
 		is_player_attackable = true
