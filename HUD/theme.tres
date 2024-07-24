@@ -34,7 +34,7 @@ corner_radius_top_right = 1024
 
 [resource]
 default_font = ExtResource("1_obmlv")
-Button/font_sizes/font_size = 25
+Button/font_sizes/font_size = 16
 Button/styles/normal = SubResource("StyleBoxFlat_gsh1t")
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = SubResource("StyleBoxLine_t54oj")

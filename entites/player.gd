@@ -7,6 +7,7 @@ class_name Player
 
 @onready var aiming_indicator = $aiming_indicator
 @onready var dash_timer = $dash_timer
+@onready var pause_menu = $PauseHUD
 
 """ to deal with player health, please use globals.player_health, it allow the
 game to syncronize player health among levels
@@ -14,8 +15,30 @@ Same for player score """
 var base_speed = 100
 var dash_speed = 600
 var speed = 100
+var paused = false
 
-	
+#__________/MAIN FUNCTION\__________
+
+# main function that run at  every game tick
+func _process(delta):
+	if globals.player_health <= 0:
+		globals.player_health = globals.player_max_health
+		globals.player_mana = globals.player_max_mana
+		get_tree().change_scene_to_file("res://HUD/MainMenu.tscn")
+	direction_indicator()
+	movment()
+	if Input.is_action_just_pressed("cast_fire_ball"):
+		cast_fire_ball()
+	if Input.is_action_just_pressed("hit"):
+		hit()
+	if Input.is_action_just_pressed("cast_dacay"):
+		cast_dacay()
+	if Input.is_action_just_pressed("pause"):
+		pauseMenu()
+
+
+
+#__________/FUNCTION DEFINITION\__________
 
 # function that return the asked current input value
 func get_input_values(input_type:int):
@@ -87,22 +110,6 @@ func dash():
 	speed = dash_speed
 	dash_timer.start()
 
-# main function that run at  every game tick
-func _process(delta):
-	if globals.player_health <= 0:
-		globals.player_health = globals.player_max_health
-		globals.player_mana = globals.player_max_mana
-		get_tree().change_scene_to_file("res://HUD/MainMenu.tscn")
-	direction_indicator()
-	movment()
-	if Input.is_action_just_pressed("cast_fire_ball"):
-		cast_fire_ball()
-	if Input.is_action_just_pressed("hit"):
-		hit()
-	if Input.is_action_just_pressed("cast_dacay"):
-		cast_dacay()
-
-
 func _on_mana_regen_timeout():
 	if globals.player_mana < globals.player_max_mana:
 		globals.player_mana += 2
@@ -111,3 +118,13 @@ func _on_mana_regen_timeout():
 func _on_dash_timer_timeout():
 	globals.is_player_hittable = true
 	speed = base_speed
+
+
+func pauseMenu():
+	if paused:
+		pause_menu.hide()
+		Engine.time_scale = 1
+	else:
+		pause_menu.show()
+		Engine.time_scale = 0
+	paused = !paused

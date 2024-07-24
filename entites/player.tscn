@@ -1,17 +1,84 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg8h3y7u81lho"]
+[gd_scene load_steps=30 format=3 uid="uid://dg8h3y7u81lho"]
 
-[ext_resource type="Texture2D" uid="uid://cxjx2hv25f3oq" path="res://icon.svg" id="1_sgyb8"]
 [ext_resource type="Script" path="res://entites/player.gd" id="1_wogxi"]
 [ext_resource type="PackedScene" uid="uid://dbmhjms4c1fnp" path="res://ability/fire_ball.tscn" id="2_qdtym"]
 [ext_resource type="PackedScene" uid="uid://dmmxqc7025isr" path="res://ability/hit_provider.tscn" id="3_xy80w"]
 [ext_resource type="PackedScene" uid="uid://ct683kn53177d" path="res://ability/decay.tscn" id="4_f8ohh"]
 [ext_resource type="PackedScene" uid="uid://cfuet6ml2oh43" path="res://ability/aiming_indicator.tscn" id="6_ge0o8"]
 [ext_resource type="PackedScene" uid="uid://cqr2xa8rm7qij" path="res://HUD/MainHud.tscn" id="7_lcelq"]
+[ext_resource type="AudioStream" uid="uid://bf6i606g8vegl" path="res://assets/sounds/music/Night Ambient 2 (Loop).wav" id="8_arvot"]
+[ext_resource type="PackedScene" uid="uid://dw5rc3b4xyr8x" path="res://HUD/pause_hud.tscn" id="8_r1mud"]
+
+[sub_resource type="Animation" id="Animation_yadeu"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6xbv"]
+_data = {
+"idle": SubResource("Animation_yadeu")
+}
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nc888"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ip3ym"]
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_js8sd"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_fapkw"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hhb1h"]
+graph_offset = Vector2(-310.103, 114.234)
+nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_js8sd")
+nodes/BlendSpace1D/position = Vector2(-80, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_fapkw")
+nodes/TimeScale/position = Vector2(117.968, 132.469)
+node_connections = [&"TimeScale", 0, &"BlendSpace1D", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lt6hs"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bdrsh"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mh0cc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f8k75"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s6qi8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nypwo"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ackts"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yrbkn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fuhe7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4ydp"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m5ugw"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ke1r"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_peptt"]
+states/Cast/node = SubResource("AnimationNodeBlendTree_nc888")
+states/Cast/position = Vector2(359, 186)
+states/Damage/node = SubResource("AnimationNodeBlendTree_ip3ym")
+states/Damage/position = Vector2(359, -9)
+states/Idle/node = SubResource("AnimationNodeBlendTree_hhb1h")
+states/Idle/position = Vector2(359, 100)
+states/Walk/node = SubResource("AnimationNodeBlendTree_lt6hs")
+states/Walk/position = Vector2(538, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bdrsh"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_mh0cc"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_f8k75"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_s6qi8"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_nypwo"), "Cast", "Walk", SubResource("AnimationNodeStateMachineTransition_ackts"), "Walk", "Cast", SubResource("AnimationNodeStateMachineTransition_yrbkn"), "Idle", "Damage", SubResource("AnimationNodeStateMachineTransition_fuhe7"), "Damage", "Idle", SubResource("AnimationNodeStateMachineTransition_j4ydp"), "Damage", "Walk", SubResource("AnimationNodeStateMachineTransition_m5ugw"), "Walk", "Damage", SubResource("AnimationNodeStateMachineTransition_8ke1r")]
+graph_offset = Vector2(-209, -41)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6fxw"]
 size = Vector2(12, 7)
-
-[sub_resource type="AnimationRootNode" id="AnimationRootNode_ugj0f"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wogxi")
@@ -19,24 +86,17 @@ FIRE_BALL = ExtResource("2_qdtym")
 HIT_PROVIDER = ExtResource("3_xy80w")
 DECAY = ExtResource("4_f8ohh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
-shape = SubResource("RectangleShape2D_j6fxw")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../AnimationPlayer")
-tree_root = SubResource("AnimationRootNode_ugj0f")
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_w6xbv")
+}
+tree_root = SubResource("AnimationNodeStateMachine_peptt")
+parameters/Idle/BlendSpace1D/blend_position = 0
+parameters/Idle/TimeScale/scale = 1.0
 
 [node name="aiming_indicator" parent="." instance=ExtResource("6_ge0o8")]
 position = Vector2(0, 14)
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-1.90735e-06, -1.90735e-06)
-scale = Vector2(0.109375, 0.234375)
-texture = ExtResource("1_sgyb8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
@@ -53,6 +113,22 @@ autostart = true
 [node name="dash_timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="PauseHUD" parent="." instance=ExtResource("8_r1mud")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_j6fxw")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_arvot")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="mana_regen" to="." method="_on_mana_regen_timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

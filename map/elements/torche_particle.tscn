@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://btex3rhflnuy8"]
+
+[sub_resource type="Gradient" id="Gradient_qcfm0"]
+colors = PackedColorArray(1, 0.301961, 0, 1, 1, 0, 0, 1)
+
+[node name="TorcheParticle" type="CPUParticles2D"]
+amount = 25
+lifetime = 1.5
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector2(0, -20)
+scale_amount_min = 0.2
+scale_amount_max = 1.5
+split_scale = true
+scale_curve_x = null
+scale_curve_y = null
+color_ramp = SubResource("Gradient_qcfm0")

@@ -18,3 +18,13 @@ func _physics_process(delta):
 # may need to be removed to let player hit out screen target
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+#destroy animation needed
+func destory():
+	queue_free()
+
+func _on_body_entered(body):
+	print(body)
+	if not body is Player:
+		destory()
+

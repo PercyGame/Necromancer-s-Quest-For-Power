@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw5rc3b4xyr8x"]
+
+[ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="1_425ll"]
+[ext_resource type="Script" path="res://HUD/pause_hud.gd" id="1_tt7rt"]
+
+[node name="PauseHUD" type="CanvasLayer"]
+scale = Vector2(3, 3)
+transform = Transform2D(3, 0, 0, 3, 0, 0)
+script = ExtResource("1_tt7rt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.334
+anchor_bottom = 0.334
+offset_right = -0.768036
+offset_bottom = -0.432007
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_425ll")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resume" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="parametres" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Parametres"
+
+[node name="quit" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

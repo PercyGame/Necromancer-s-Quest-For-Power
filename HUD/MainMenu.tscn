@@ -57,7 +57,7 @@ vertical_alignment = 1
 
 [node name="spacer" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 32
 text = "
 "
 horizontal_alignment = 1
@@ -65,22 +65,26 @@ vertical_alignment = 1
 
 [node name="play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 action_mode = 0
 text = "Play"
 text_direction = 1
 
 [node name="credits" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 action_mode = 0
 text = "Credits"
 
 [node name="parameters" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 action_mode = 0
 text = "Parameters"
 
 [node name="quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 action_mode = 0
 text = "Quit game"
 
