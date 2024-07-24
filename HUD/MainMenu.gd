@@ -6,7 +6,7 @@ class_name Main_menu
 @onready var parameters_button = $MarginContainer/VBoxContainer/parameters
 @onready var quit_button = $MarginContainer/VBoxContainer/quit
 
-var main_scene = load("res://map/dev map.tscn")
+var main_scene = load("res://map/main_hall.tscn")
 
 func _ready():
 	play_button.grab_focus() #init the controleur menu control on play button
