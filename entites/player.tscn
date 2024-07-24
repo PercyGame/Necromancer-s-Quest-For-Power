@@ -1,13 +1,51 @@
-[gd_scene load_steps=30 format=3 uid="uid://dg8h3y7u81lho"]
+[gd_scene load_steps=34 format=3 uid="uid://dg8h3y7u81lho"]
 
 [ext_resource type="Script" path="res://entites/player.gd" id="1_wogxi"]
 [ext_resource type="PackedScene" uid="uid://dbmhjms4c1fnp" path="res://ability/fire_ball.tscn" id="2_qdtym"]
 [ext_resource type="PackedScene" uid="uid://dmmxqc7025isr" path="res://ability/hit_provider.tscn" id="3_xy80w"]
 [ext_resource type="PackedScene" uid="uid://ct683kn53177d" path="res://ability/decay.tscn" id="4_f8ohh"]
 [ext_resource type="PackedScene" uid="uid://cfuet6ml2oh43" path="res://ability/aiming_indicator.tscn" id="6_ge0o8"]
+[ext_resource type="Texture2D" uid="uid://bwn8g4h405oxy" path="res://assets/entites/player/player.png" id="6_w85mv"]
 [ext_resource type="PackedScene" uid="uid://cqr2xa8rm7qij" path="res://HUD/MainHud.tscn" id="7_lcelq"]
 [ext_resource type="AudioStream" uid="uid://bf6i606g8vegl" path="res://assets/sounds/music/Night Ambient 2 (Loop).wav" id="8_arvot"]
 [ext_resource type="PackedScene" uid="uid://dw5rc3b4xyr8x" path="res://HUD/pause_hud.tscn" id="8_r1mud"]
+
+[sub_resource type="Animation" id="Animation_8wcuf"]
+resource_name = "idle"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_lq2qi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jy10"]
+_data = {
+"RESET": SubResource("Animation_lq2qi"),
+"idle": SubResource("Animation_8wcuf")
+}
 
 [sub_resource type="Animation" id="Animation_yadeu"]
 resource_name = "idle"
@@ -86,6 +124,16 @@ FIRE_BALL = ExtResource("2_qdtym")
 HIT_PROVIDER = ExtResource("3_xy80w")
 DECAY = ExtResource("4_f8ohh")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_w85mv")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5jy10")
+}
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("")
 libraries = {
@@ -127,8 +175,6 @@ stream = ExtResource("8_arvot")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="mana_regen" to="." method="_on_mana_regen_timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
