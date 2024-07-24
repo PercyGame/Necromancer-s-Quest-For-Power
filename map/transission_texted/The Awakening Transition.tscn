@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciufk5xskschc"]
+
+[ext_resource type="Script" path="res://map/transission_texted/The Awakening Transition.gd" id="1_180y4"]
+[ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="2_sjxdm"]
+
+[sub_resource type="Gradient" id="Gradient_q167b"]
+offsets = PackedFloat32Array(0, 0.996063)
+colors = PackedColorArray(0.0823529, 0.0823529, 0.0823529, 1, 0.0823529, 0.0823529, 0.0823529, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q7xi1"]
+gradient = SubResource("Gradient_q167b")
+
+[node name="TheAwakeningTransition" type="Node2D"]
+script = ExtResource("1_180y4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_q7xi1")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_sjxdm")
+theme_override_font_sizes/font_size = 64
+text = "\"The air thickens with rot...
+The Necromancer's journey
+for power begins...\""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

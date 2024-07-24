@@ -5,7 +5,10 @@ class_name Jar
 
 @export var item_to_spawn_on_break: PackedScene
 
+var breacked = false
+
 func break_jar():
+	breacked = true
 	anim.play("break")
 	if item_to_spawn_on_break != null:
 		var inst = item_to_spawn_on_break.instantiate()
@@ -16,6 +19,6 @@ func break_jar():
 
 
 func _on_area_entered(area):
-	if area is Hit_provider:
+	if area is Hit_provider and not breacked:
 		break_jar()
 
