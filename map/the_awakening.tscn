@@ -57,9 +57,6 @@ position = Vector2(71, 81)
 [node name="left_torche" parent="." instance=ExtResource("6_vbci3")]
 position = Vector2(-56, 54)
 
-[node name="Player" parent="." instance=ExtResource("7_a74lt")]
-position = Vector2(0, 106)
-
 [node name="Jar4" parent="." instance=ExtResource("5_6puot")]
 position = Vector2(264, -56)
 item_to_spawn_on_break = ExtResource("8_pf6rc")
@@ -67,3 +64,7 @@ item_to_spawn_on_break = ExtResource("8_pf6rc")
 [node name="Teleporteur" parent="." instance=ExtResource("9_k31yx")]
 position = Vector2(65, 130)
 target_scene = ExtResource("10_ohxff")
+can_teleport = true
+
+[node name="Player" parent="." instance=ExtResource("7_a74lt")]
+position = Vector2(0, 106)
