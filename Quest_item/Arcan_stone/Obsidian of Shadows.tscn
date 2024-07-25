@@ -1,14 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2hhmf6rhc4qu"]
+[gd_scene load_steps=5 format=3 uid="uid://c2hhmf6rhc4qu"]
 
+[ext_resource type="Script" path="res://Quest_item/Arcan_stone/Obsidian of Shadows.gd" id="1_8qydc"]
 [ext_resource type="Texture2D" uid="uid://cmgq3br1ac5xy" path="res://assets/arcan stone/Obsidian of Shadows.png" id="1_qisop"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i1d01"]
 radius = 7.07107
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3pply"]
+radius = 14.0
+
 [node name="ObsidianOfShadows" type="StaticBody2D"]
+script = ExtResource("1_8qydc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i1d01")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
 texture = ExtResource("1_qisop")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3pply")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

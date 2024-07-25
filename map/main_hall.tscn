@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd1idm6nx64be"]
+[gd_scene load_steps=11 format=3 uid="uid://dd1idm6nx64be"]
 
 [ext_resource type="TileSet" uid="uid://fqca2sb8ktlg" path="res://assets/environment/tile_set.tres" id="1_mi88x"]
 [ext_resource type="PackedScene" uid="uid://dg8h3y7u81lho" path="res://entites/player.tscn" id="2_xabik"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bj1q3v3lc1dw5" path="res://assets/environment/Dungeon Prison/Assets/boss_fence.png" id="8_mbro0"]
 [ext_resource type="PackedScene" uid="uid://cuakh3ujuytru" path="res://map/elements/teleporteur.tscn" id="8_q1jgd"]
 [ext_resource type="PackedScene" uid="uid://ciufk5xskschc" path="res://map/transission_texted/The Awakening Transition.tscn" id="9_0qwig"]
+[ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="10_vljpn"]
 
 [node name="Main_hall" type="Node2D"]
 
@@ -76,3 +77,23 @@ position = Vector2(4, 64)
 position = Vector2(175, -74)
 target_scene = ExtResource("9_0qwig")
 can_teleport = true
+
+[node name="Label" type="Label" parent="."]
+z_index = 15
+offset_left = -39.0
+offset_top = 137.0
+offset_right = 39.0
+offset_bottom = 172.0
+theme = ExtResource("10_vljpn")
+text = "Use L1 to
+cast a decay"
+
+[node name="Label2" type="Label" parent="."]
+z_index = 15
+offset_left = 140.0
+offset_top = -141.0
+offset_right = 218.0
+offset_bottom = -106.0
+theme = ExtResource("10_vljpn")
+text = "Please do not
+break any jar"

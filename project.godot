@@ -24,6 +24,7 @@ globals="*res://scripts/globals.gd"
 
 [display]
 
+window/size/mode=4
 window/size/resizable=false
 mouse_cursor/custom_image="res://assets/ui/mouse.png"
 
