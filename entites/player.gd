@@ -22,6 +22,10 @@ var paused = false
 
 # main function that run at  every game tick
 func _process(delta):
+	
+	if globals.Obsidian_of_Shadows == true:
+		get_tree().change_scene_to_file("res://map/transission_texted/temp_end.tscn" )
+	
 	if get_input_values(0) == Vector2.ZERO:
 		animation_tree.get("parameters/playback").travel("Idle")
 	else:

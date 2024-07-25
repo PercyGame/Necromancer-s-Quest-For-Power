@@ -91,9 +91,9 @@ cast a decay"
 [node name="Label2" type="Label" parent="."]
 z_index = 15
 offset_left = 140.0
-offset_top = -141.0
-offset_right = 218.0
-offset_bottom = -106.0
+offset_top = -146.0
+offset_right = 223.0
+offset_bottom = -111.0
 theme = ExtResource("10_vljpn")
 text = "Please do not
 break any jar"

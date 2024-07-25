@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvpajmebxc27o"]
+[gd_scene load_steps=12 format=3 uid="uid://dvpajmebxc27o"]
 
 [ext_resource type="TileSet" uid="uid://fqca2sb8ktlg" path="res://assets/environment/tile_set.tres" id="1_qgcfi"]
 [ext_resource type="PackedScene" uid="uid://boci7uir3oob8" path="res://map/elements/torche.tscn" id="1_sincv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2hhmf6rhc4qu" path="res://Quest_item/Arcan_stone/Obsidian of Shadows.tscn" id="8_pf6rc"]
 [ext_resource type="PackedScene" uid="uid://cuakh3ujuytru" path="res://map/elements/teleporteur.tscn" id="9_k31yx"]
 [ext_resource type="PackedScene" uid="uid://dd1idm6nx64be" path="res://map/main_hall.tscn" id="10_ohxff"]
+[ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="11_vhyiy"]
 
 [node name="The Awakening" type="Node2D"]
 
@@ -68,3 +69,14 @@ can_teleport = true
 
 [node name="Player" parent="." instance=ExtResource("7_a74lt")]
 position = Vector2(0, 106)
+
+[node name="Label" type="Label" parent="."]
+z_index = 15
+offset_left = 94.0
+offset_top = -3.0
+offset_right = 134.0
+offset_bottom = 20.0
+theme = ExtResource("11_vhyiy")
+text = "Don't forget that you have to
+decay it, before being able
+to damage it"
