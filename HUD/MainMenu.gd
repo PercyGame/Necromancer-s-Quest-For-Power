@@ -7,6 +7,7 @@ class_name Main_menu
 @onready var quit_button = $MarginContainer/VBoxContainer/quit
 
 var main_scene = load("res://map/transission_texted/intro1.tscn")
+var credit_scene = load("res://HUD/credit.tscn")
 
 func _ready():
 	play_button.grab_focus() #init the controleur menu control on play button
@@ -20,8 +21,8 @@ func _on_play_button_pressed():
 	get_tree().change_scene_to_packed(main_scene)
 
 func _on_credits_button_pressed():
-	pass
 	#open the credit menu
+	get_tree().change_scene_to_packed(credit_scene)
 
 func _on_parameters_button_pressed():
 	pass

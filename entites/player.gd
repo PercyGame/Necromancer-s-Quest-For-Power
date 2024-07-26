@@ -17,6 +17,7 @@ var base_speed = 100
 var dash_speed = 600
 var speed = 100
 var paused = false
+var mana_reloading_speed = 15
 
 #__________/MAIN FUNCTION\__________
 
@@ -132,7 +133,9 @@ func dash():
 
 func _on_mana_regen_timeout():
 	if globals.player_mana < globals.player_max_mana:
-		globals.player_mana += 2
+		globals.player_mana += mana_reloading_speed
+	if globals.player_mana > globals.player_max_mana:
+		globals.player_mana = globals.player_max_mana
 
 
 func _on_dash_timer_timeout():

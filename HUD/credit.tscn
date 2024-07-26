@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctq288q1fa7yh"]
+
+[ext_resource type="Theme" uid="uid://b28w6ny6cu743" path="res://HUD/theme.tres" id="1_ty2fn"]
+[ext_resource type="Script" path="res://HUD/credit.gd" id="2_5tnhu"]
+[ext_resource type="AudioStream" uid="uid://d13a7llqh6151" path="res://assets/sounds/music/Light Ambient 5 (Loop).wav" id="3_xup0m"]
+
+[node name="Credit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ty2fn")
+script = ExtResource("2_5tnhu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ty2fn")
+theme_override_font_sizes/font_size = 24
+text = "Fonts:
+Alkhemikal by jeti: A modern, legible take on blackletter that evokes lore-dense scrolls and boss encounters.
+Licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+More info: https://fontenddev.com/fonts/alkhemikal/
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 111.0
+offset_bottom = 32.0
+theme = ExtResource("1_ty2fn")
+text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xup0m")
+autoplay = true
+bus = &"Music"
+
+[connection signal="button_down" from="CanvasLayer/Button" to="." method="_on_button_button_down"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3b0r6f4ki143"]
+
+[ext_resource type="Texture2D" uid="uid://bj1q3v3lc1dw5" path="res://assets/environment/Dungeon Prison/Assets/boss_fence.png" id="1_jarr7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_evkje"]
+size = Vector2(64, 40)
+
+[node name="BossGate" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jarr7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_evkje")
